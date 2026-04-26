@@ -1,1376 +1,1183 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎸 Chi Meriterà il Concerto dei Radiohead con Teresa?</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-        }
-
-        /* Landing Page */
-        #landing {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            animation: fadeIn 1s ease-in;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 2em;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-            animation: float 3s ease-in-out infinite;
-            line-height: 1.2;
-        }
-
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 3.5em;
-                margin-bottom: 20px;
-            }
-        }
-
-        .emoji-large {
-            font-size: 3em;
-            margin-bottom: 15px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @media (min-width: 768px) {
-            .emoji-large {
-                font-size: 5em;
-                margin-bottom: 20px;
-            }
-        }
-
-        .subtitle {
-            font-size: 1.1em;
-            max-width: 700px;
-            margin: 15px auto;
-            line-height: 1.6;
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        @media (min-width: 768px) {
-            .subtitle {
-                font-size: 1.3em;
-                margin: 20px auto;
-                padding: 30px;
-            }
-        }
-
-        .start-btn {
-            margin-top: 30px;
-            padding: 15px 35px;
-            font-size: 1.2em;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            font-weight: bold;
-            color: #764ba2;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        @media (min-width: 768px) {
-            .start-btn {
-                margin-top: 40px;
-                padding: 20px 50px;
-                font-size: 1.5em;
-            }
-        }
-
-        .start-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        .start-btn:active {
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        /* Quiz Container */
-        #quiz-container {
-            display: none;
-            min-height: 100vh;
-            padding: 20px 10px;
-        }
-
-        @media (min-width: 768px) {
-            #quiz-container {
-                padding: 40px 20px;
-            }
-        }
-
-        .challenge-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            margin: 20px auto;
-            max-width: 800px;
-            animation: slideIn 0.5s ease-out;
-            opacity: 0;
-            animation-fill-mode: forwards;
-        }
-
-        @media (min-width: 768px) {
-            .challenge-card {
-                border-radius: 30px;
-                padding: 40px;
-            }
-        }
-
-        .challenge-card.active {
-            opacity: 1;
-        }
-
-        .challenge-number {
-            display: inline-block;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: bold;
-            color: #764ba2;
-            margin-bottom: 15px;
-            font-size: 0.9em;
-        }
-
-        @media (min-width: 768px) {
-            .challenge-number {
-                padding: 10px 20px;
-                margin-bottom: 20px;
-                font-size: 1em;
-            }
-        }
-
-        .question {
-            font-size: 1.4em;
-            margin: 15px 0;
-            color: #333;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        @media (min-width: 768px) {
-            .question {
-                font-size: 1.8em;
-                margin: 20px 0;
-            }
-        }
-
-        /* Multiple Choice */
-        .options {
-            display: grid;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        @media (min-width: 768px) {
-            .options {
-                gap: 15px;
-                margin: 30px 0;
-            }
-        }
-
-        .option {
-            padding: 15px;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border: 3px solid transparent;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1em;
-            text-align: left;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        @media (min-width: 768px) {
-            .option {
-                padding: 20px;
-                font-size: 1.1em;
-            }
-        }
-
-        .option:hover, .option:active {
-            transform: translateX(10px);
-            border-color: #764ba2;
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
-        }
-
-        .option.selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #764ba2;
-        }
-
-        /* Text Input */
-        textarea, input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            font-size: 1em;
-            border: 3px solid #ffecd2;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            resize: vertical;
-        }
-
-        @media (min-width: 768px) {
-            textarea, input[type="text"] {
-                padding: 20px;
-                font-size: 1.1em;
-            }
-        }
-
-        textarea:focus, input[type="text"]:focus {
-            outline: none;
-            border-color: #764ba2;
-            box-shadow: 0 0 20px rgba(118, 75, 162, 0.2);
-        }
-
-        /* Slider */
-        .slider-container {
-            margin: 40px 0;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            height: 15px;
-            border-radius: 10px;
-            background: linear-gradient(to right, #ffecd2, #764ba2);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #764ba2;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .slider-value {
-            font-size: 2em;
-            text-align: center;
-            margin: 20px 0;
-            color: #764ba2;
-            font-weight: bold;
-        }
-
-        /* Word Search Game */
-        .word-search-grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 3px;
-            margin: 20px auto;
-            max-width: 100%;
-            padding: 0 5px;
-        }
-
-        @media (min-width: 480px) {
-            .word-search-grid {
-                gap: 4px;
-                max-width: 400px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .word-search-grid {
-                gap: 5px;
-                margin: 30px auto;
-                max-width: 500px;
-            }
-        }
-
-        .word-cell {
-            aspect-ratio: 1;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9em;
-            color: #333;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-        }
-
-        @media (min-width: 480px) {
-            .word-cell {
-                border-radius: 6px;
-                font-size: 1em;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .word-cell {
-                border-radius: 8px;
-                font-size: 1.2em;
-            }
-        }
-
-        .word-cell:hover, .word-cell:active {
-            transform: scale(1.1);
-        }
-
-        .word-cell.found {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .words-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin: 15px 0;
-        }
-
-        @media (min-width: 768px) {
-            .words-list {
-                gap: 15px;
-                margin: 20px 0;
-            }
-        }
-
-        .word-item {
-            padding: 8px 15px;
-            background: #f0f0f0;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9em;
-        }
-
-        @media (min-width: 768px) {
-            .word-item {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-        }
-
-        .word-item.found {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            text-decoration: line-through;
-        }
-
-        /* Flappy Game */
-        #flappyCanvas {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            aspect-ratio: 4 / 5;
-            border: 4px solid #764ba2;
-            border-radius: 15px;
-            display: block;
-            margin: 20px auto;
-            background: linear-gradient(to bottom, #a8edea 0%, #fed6e3 100%);
-            touch-action: none;
-        }
-
-        @media (min-width: 768px) {
-            #flappyCanvas {
-                border: 5px solid #764ba2;
-                border-radius: 20px;
-            }
-        }
-
-        .game-instructions {
-            text-align: center;
-            font-size: 1em;
-            margin: 15px 0;
-            color: #764ba2;
-            font-weight: bold;
-            line-height: 1.4;
-        }
-
-        @media (min-width: 768px) {
-            .game-instructions {
-                font-size: 1.2em;
-                margin: 20px 0;
-            }
-        }
-
-        .game-score {
-            text-align: center;
-            font-size: 1.5em;
-            color: #764ba2;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        @media (min-width: 768px) {
-            .game-score {
-                font-size: 2em;
-            }
-        }
-
-        /* Image Challenge */
-        .challenge-image {
-            width: 100%;
-            max-width: 500px;
-            margin: 15px auto;
-            display: block;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        @media (min-width: 768px) {
-            .challenge-image {
-                margin: 20px auto;
-                border-radius: 20px;
-            }
-        }
-
-        /* Next Button */
-        .next-btn {
-            margin-top: 25px;
-            padding: 12px 30px;
-            font-size: 1.1em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            font-weight: bold;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        @media (min-width: 768px) {
-            .next-btn {
-                margin-top: 30px;
-                padding: 15px 40px;
-                font-size: 1.2em;
-            }
-        }
-
-        .next-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-
-        .next-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .next-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* Progress Bar */
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        @media (min-width: 768px) {
-            .progress-bar {
-                height: 10px;
-                margin-bottom: 30px;
-            }
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            transition: width 0.5s ease;
-            border-radius: 10px;
-        }
-
-        /* Final Screen */
-        #final-screen {
-            display: none;
-            min-height: 100vh;
-            padding: 30px 15px;
-            text-align: center;
-            color: white;
-        }
-
-        @media (min-width: 768px) {
-            #final-screen {
-                padding: 40px 20px;
-            }
-        }
-
-        .final-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
-            max-width: 700px;
-            margin: 0 auto;
-            color: #333;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        @media (min-width: 768px) {
-            .final-card {
-                border-radius: 30px;
-                padding: 50px;
-            }
-        }
-
-        .final-card h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #764ba2;
-            line-height: 1.2;
-        }
-
-        @media (min-width: 768px) {
-            .final-card h2 {
-                font-size: 2.5em;
-                margin-bottom: 30px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        /* Timestamp */
-        .timestamp {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.7em;
-            font-family: monospace;
-        }
-
-        @media (min-width: 768px) {
-            .timestamp {
-                font-size: 0.8em;
-            }
-        }
-    </style>
+<!--
+==========================================================
+  THE WITCHY GIRLS — TAROT CARD GAME
+==========================================================
+  Generated: April 2026
+
+  GITHUB IMAGE HOSTING
+  --------------------
+  Repo:   https://github.com/chatgptree/tarot
+  Images: /images/ folder (78 cards + card_back.webp)
+  URL:    https://raw.githubusercontent.com/chatgptree/tarot/main/images/
+
+  OPTIONAL: Enable GitHub Pages (repo → Settings → Pages → main branch)
+  Then swap BASE_URL in <script> to:
+  https://chatgptree.github.io/tarot/images/
+
+  SQUARESPACE SETUP (Standalone Page)
+  ------------------------------------
+  1. Pages → + → Blank Page
+  2. Design → Page Layout → Full Width (no sidebar)
+  3. Edit Page → Add Block → Code
+  4. Paste this ENTIRE file into the Code Block
+  5. Click Apply → Save → Preview before publishing
+
+  SQUARESPACE NOTES
+  -----------------
+  - Business plan or above required for Code Blocks with JS
+  - If JS is stripped: Settings → Advanced → Code Injection → Footer
+    (paste the <script> block there; keep HTML/CSS in the Code Block)
+  - External images load from GitHub — internet connection required
+  - Set page padding to 0 in Page Settings for full-bleed look
+
+  CARDS: 78 (22 Major Arcana + 14 each Cups/Swords/Wands/Pentacles)
+  THEME: 90s web witch camp — dark, glittery, irreverent
+==========================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Witchy Girls — Tarot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #08000f;
+    --surface: #110020;
+    --purple:  #9b30ff;
+    --pink:    #ff3fa4;
+    --gold:    #f0c040;
+    --pale:    #e8d8ff;
+    --muted:   #a080c0;
+    --card-w:  220px;
+    --card-h:  340px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--pale);
+    font-family: 'IM Fell English', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Stars ── */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .star {
+    position: absolute;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) var(--delay, 0s) infinite alternate;
+  }
+  @keyframes twinkle {
+    0%   { opacity: 0.1; transform: scale(0.8); }
+    100% { opacity: 0.9; transform: scale(1.2); }
+  }
+
+  /* ── Wrapper ── */
+  .game-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    text-align: center;
+  }
+
+  /* ── Header ── */
+  .site-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 5vw, 2.4rem);
+    font-weight: 700;
+    color: var(--pink);
+    text-shadow: 0 0 20px #ff3fa488;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+  .site-sub {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 2.2rem;
+  }
+
+  /* ── Instruction ── */
+  .instruction {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    transition: opacity 0.4s;
+  }
+  .instruction.hidden { opacity: 0; pointer-events: none; }
+
+  /* ── Card flip ── */
+  .card-scene {
+    perspective: 1200px;
+    width: var(--card-w);
+    height: var(--card-h);
+    margin: 0 auto 2rem;
+    cursor: pointer;
+  }
+  .card-scene:hover .card-inner:not(.flipped) {
+    transform: rotateY(8deg) translateY(-6px);
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .card-inner.flipped { transform: rotateY(180deg); }
+
+  .card-face, .card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  /* ── Card back: image ── */
+  .card-back {
+    border: 2px solid var(--purple);
+    box-shadow: 0 0 30px #9b30ff44;
+    background: var(--surface);
+  }
+  .card-back-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+  }
+  /* Fallback if image fails */
+  .card-back-fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .card-back-img.error + .card-back-fallback { display: flex; }
+  .card-back-moon {
+    font-size: 3.8rem;
+    filter: drop-shadow(0 0 12px var(--purple));
+    animation: glow 2.5s ease-in-out infinite alternate;
+  }
+  .card-back-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    color: var(--purple);
+    text-transform: uppercase;
+  }
+  .card-back-stars { font-size: 0.9rem; color: var(--gold); letter-spacing: 0.3em; }
+  @keyframes glow {
+    from { filter: drop-shadow(0 0 8px var(--purple)); }
+    to   { filter: drop-shadow(0 0 22px var(--pink)); }
+  }
+
+  /* ── Card face: full artwork image ── */
+  .card-face {
+    background: #0d0020;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 30px #f0c04033;
+    transform: rotateY(180deg);
+  }
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+  }
+
+  /* ── Tap hint ── */
+  .tap-hint {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .tap-hint.hidden { display: none; }
+
+  /* ── Card revealed label (appears after flip) ── */
+  .card-revealed {
+    margin-bottom: 1rem;
+    transition: opacity 0.4s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .card-revealed.show { opacity: 1; }
+  .revealed-suit {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .revealed-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 3.5vw, 1.35rem);
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 14px #f0c04066;
+    line-height: 1.2;
+  }
+  .revealed-character {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--pink);
+    margin-top: 0.2rem;
+  }
+
+  /* ── Meaning reveal ── */
+  .meaning-wrap {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+    opacity: 0;
+    margin-bottom: 1rem;
+  }
+  .meaning-wrap.open { max-height: 600px; opacity: 1; }
+
+  .meaning-box {
+    background: var(--surface);
+    border: 1px solid #5a2080;
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    text-align: left;
+    position: relative;
+  }
+  .meaning-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .meaning-keyword {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.9rem;
+    line-height: 1.5;
+  }
+  .meaning-text {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--pale);
+    font-style: italic;
+  }
+  .meaning-corner {
+    position: absolute;
+    color: var(--gold);
+    font-size: 0.9rem;
+    opacity: 0.4;
+  }
+  .meaning-corner.tl { top: 6px; left: 8px; }
+  .meaning-corner.tr { top: 6px; right: 8px; }
+  .meaning-corner.bl { bottom: 6px; left: 8px; }
+  .meaning-corner.br { bottom: 6px; right: 8px; }
+
+  /* ── Buttons ── */
+  .btn {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    padding: 0.7rem 1.8rem;
+    border-radius: 40px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 0.4rem;
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-reveal {
+    background: var(--pink);
+    color: #fff;
+    box-shadow: 0 0 18px #ff3fa466;
+  }
+  .btn-reveal:hover { box-shadow: 0 0 28px #ff3fa499; transform: translateY(-2px); }
+  .btn-reveal.hidden { display: none; }
+
+  .btn-again {
+    background: transparent;
+    color: var(--purple);
+    border: 1px solid var(--purple);
+    box-shadow: 0 0 12px #9b30ff33;
+  }
+  .btn-again:hover { box-shadow: 0 0 22px #9b30ff66; transform: translateY(-2px); }
+  .btn-again.hidden { display: none; }
+
+  .blink { animation: blink 1.1s step-start infinite; color: var(--gold); }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .game-footer { margin-top: 3rem; font-size: 0.75rem; color: #5a3070; font-style: italic; }
+
+  @media (max-width: 400px) {
+    :root { --card-w: 180px; --card-h: 280px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Landing Page -->
-    <div id="landing">
-        <div class="emoji-large">🎸</div>
-        <h1>Chi Meriterà il Concerto dei Radiohead con Teresa?</h1>
-        <div class="subtitle">
-            <p>Sei pronto/a a dimostrare di essere il/la compagno/a di concerto perfetto/a per Teresa?</p>
-            <p>Affronta 10 sfide tra domande, giochi e test di gusto musicale. Alla fine, Teresa saprà se sei degno/a di piangere insieme a lei durante <em>Street Spirit</em>.</p>
-            <p>🎵 Preparati a svelare la tua vera anima radioheadiana! 🎵</p>
+
+<div class="stars" id="stars"></div>
+
+<div class="game-wrap">
+
+  <h1 class="site-title">✦ Tarot ✦</h1>
+  <p class="site-sub">by The Witchy Girls</p>
+
+  <p class="instruction" id="instruction">
+    Close your eyes. Think of your question.<br>
+    When you're ready — <span class="blink">✦</span> click the card <span class="blink">✦</span>
+  </p>
+
+  <!-- Card -->
+  <div class="card-scene" id="cardScene" onclick="flipCard()">
+    <div class="card-inner" id="cardInner">
+
+      <!-- Back -->
+      <div class="card-back">
+        <img
+          class="card-back-img"
+          id="cardBackImg"
+          src=""
+          alt="Card Back"
+          onerror="this.classList.add('error'); this.style.display='none';"
+        >
+        <div class="card-back-fallback">
+          <div class="card-back-stars">✦ ✧ ✦</div>
+          <div class="card-back-moon">🌙</div>
+          <div class="card-back-text">The Witchy Girls</div>
+          <div class="card-back-stars">✧ ✦ ✧</div>
         </div>
-        <button class="start-btn" onclick="startQuiz()">Inizia il Test! 🚀</button>
+      </div>
+
+      <!-- Front -->
+      <div class="card-face">
+        <img class="card-img" id="cardImg" src="" alt="">
+      </div>
+
     </div>
+  </div>
 
-    <!-- Quiz Container -->
-    <div id="quiz-container">
-        <div class="container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressBar"></div>
-            </div>
-            <div id="challenges"></div>
-        </div>
+  <p class="tap-hint" id="tapHint">tap the card</p>
+
+  <!-- Card name revealed after flip -->
+  <div class="card-revealed" id="cardRevealed">
+    <div class="revealed-suit" id="revealedSuit"></div>
+    <div class="revealed-name" id="revealedName"></div>
+    <div class="revealed-character" id="revealedCharacter"></div>
+  </div>
+
+  <!-- Reveal button -->
+  <button class="btn btn-reveal hidden" id="revealBtn" onclick="revealMeaning()">
+    Reveal Your Fate
+  </button>
+
+  <!-- Meaning box -->
+  <div class="meaning-wrap" id="meaningWrap">
+    <div class="meaning-box">
+      <div class="meaning-label">✦ Your Reading ✦</div>
+      <p class="meaning-keyword" id="meaningKeyword"></p>
+      <p class="meaning-text" id="meaningText"></p>
+      <span class="meaning-corner tl">✦</span>
+      <span class="meaning-corner tr">✦</span>
+      <span class="meaning-corner bl">✦</span>
+      <span class="meaning-corner br">✦</span>
     </div>
+  </div>
 
-    <!-- Final Screen -->
-    <div id="final-screen">
-        <div class="final-card">
-            <div class="emoji-large">🎉</div>
-            <h2>Test Completato!</h2>
-            <p style="font-size: 1.3em; margin: 20px 0;">Le tue risposte sono state inviate a Teresa. Ora tocca a lei decidere se meriti un posto al concerto dei Radiohead! 🎸</p>
-            <p style="font-size: 1.1em; color: #764ba2; margin-top: 30px;">Preparati a piangere insieme durante <em>How to Disappear Completely</em>... o forse no! 😉</p>
-        </div>
-    </div>
+  <!-- Draw again -->
+  <button class="btn btn-again hidden" id="againBtn" onclick="resetGame()">
+    ✧ Draw Another Card ✧
+  </button>
 
-    <!-- Timestamp -->
-    <div class="timestamp">Generated: <span id="timestamp"></span></div>
+  <p class="game-footer">
+    For entertainment purposes. Or not. The universe decides.
+  </p>
 
-    <script>
-        // Set timestamp
-        document.getElementById('timestamp').textContent = new Date().toLocaleString('it-IT');
+</div>
 
-        const challenges = [
-            {
-                type: 'text',
-                question: 'Descrivi in tre parole come ti senti dopo aver ascoltato "How to Disappear Completely"',
-                id: 'q1'
-            },
-            {
-                type: 'multiple',
-                question: 'Cosa faresti se Thom Yorke ti guardasse dal palco?',
-                options: [
-                    '👋 Gli mando un cuore timido',
-                    '🕺 Ballo come se fossimo soli',
-                    '😳 Mi paralizzo',
-                    '😏 Gli urlo "Play Creep!" per dispetto'
-                ],
-                id: 'q2'
-            },
-            {
-                type: 'slider',
-                question: 'Da 0 a 10, quanto sei pronto/a a sopportare 8 minuti di "Everything in Its Right Place" in versione live ipnotica?',
-                id: 'q3'
-            },
-            {
-                type: 'image',
-                question: 'Cosa vedi in questa immagine?',
-                imagePlaceholder: 'kid-a-cover',
-                imageDesc: '[Copertina di Kid A - forme astratte e montagne]',
-                id: 'q4'
-            },
-            {
-                type: 'wordsearch',
-                question: 'Trova tutte le parole nascoste nella griglia!',
-                words: ['CREEP', 'TERESA', 'THOM', 'LIVE', 'LOTUS'],
-                id: 'q5'
-            },
-            {
-                type: 'multiple',
-                question: 'Quale canzone dei Radiohead ascolteresti mentre piove?',
-                options: [
-                    '☔ Exit Music (for a Film)',
-                    '💧 Pyramid Song',
-                    '🌧 Videotape',
-                    '🌀 Everything in Its Right Place'
-                ],
-                id: 'q6'
-            },
-            {
-                type: 'flappy',
-                question: 'Aiuta Teresa a correre per 35 secondi! Salta casse e microfoni, raccogli stelle! 🏃‍♀️⭐',
-                id: 'q7'
-            },
-            {
-                type: 'text',
-                question: 'Se dovessi regalare una canzone dei Radiohead a Teresa, quale sarebbe e perché?',
-                id: 'q8'
-            },
-            {
-                type: 'image',
-                question: 'Cosa sta pensando Thom Yorke in questo momento?',
-                imagePlaceholder: 'lotus-flower-dance',
-                imageDesc: '[Thom Yorke che balla nel video di Lotus Flower]',
-                id: 'q9'
-            },
-            {
-                type: 'multiple',
-                question: 'Ti arrabbi se qualcuno parla durante "Street Spirit (Fade Out)"?',
-                options: [
-                    '😤 Assolutamente sì, è sacrilegio',
-                    '😐 Un po\' fastidioso ma sopravvivo',
-                    '🤷 Non mi importa molto',
-                    '💀 Li faccio sparire come nella canzone'
-                ],
-                id: 'q10'
-            }
-        ];
+<script>
+// ============================================================
+//  CONFIG — swap to GitHub Pages URL if you enable it:
+//  https://chatgptree.github.io/tarot/images/
+// ============================================================
+const BASE_URL = 'https://raw.githubusercontent.com/chatgptree/tarot/main/images/';
 
-        let currentChallenge = 0;
-        let answers = {};
+// ============================================================
+//  CARDS — 78 card deck
+//  Fields: name, suit, image, character, keyword, meaning
+//  character: show/character name (empty string if none)
+// ============================================================
+const CARDS = [
 
-        function startQuiz() {
-            document.getElementById('landing').style.display = 'none';
-            document.getElementById('quiz-container').style.display = 'block';
-            renderChallenge();
-            updateProgress();
-        }
+  // ── MAJOR ARCANA ─────────────────────────────────────────
+  {
+    name: "The Fool",
+    suit: "Major Arcana · 0",
+    image: "major_00_the-fool.webp",
+    character: "Zelda Moon",
+    keyword: "Naive · Curious · Impulsive · New Beginnings",
+    meaning: "There is wisdom in foolishness. Do not let preconceptions hold you back on starting new journeys. Eyes wide shut bestie."
+  },
+  {
+    name: "The Magician",
+    suit: "Major Arcana · I",
+    image: "major_01_the-magician.webp",
+    character: "Susan Lacey",
+    keyword: "Power · Will · Making Ideas Real",
+    meaning: "You have all the talent and skill you need to harness your power and achieve your desires. Don't hold back, let 'em have it. Abracadabra!"
+  },
+  {
+    name: "The High Priestess",
+    suit: "Major Arcana · II",
+    image: "major_02_the-high-priestess.webp",
+    character: "Clippy",
+    keyword: "Mystery · Secret Knowledge · Intuition",
+    meaning: "People insist that you trust them. Don't. Spell unnnecesarry however you want."
+  },
+  {
+    name: "The Empress",
+    suit: "Major Arcana · III",
+    image: "major_03_the-empress.webp",
+    character: "Jordan Barr",
+    keyword: "Nurturing · Creativity · Comfort",
+    meaning: "Creation is imminent. Fertility? Maybe. A new creative endeavour? Sure, why not. But first, timesheets."
+  },
+  {
+    name: "The Emperor",
+    suit: "Major Arcana · IV",
+    image: "major_04_the-emperor.webp",
+    character: "Nick White",
+    keyword: "Rules · Authority · Control · Structure",
+    meaning: "You have fought your way up the corporate ladder and you're the top pig in the pen now. You are in charge of your world."
+  },
+  {
+    name: "The Hierophant",
+    suit: "Major Arcana · V",
+    image: "major_05_the-hierophant.webp",
+    character: "Hannah Gadsby",
+    keyword: "Social Norms · Conformity · Institutions",
+    meaning: "You've taken a ticket and are sitting to wait for society to tell you your path ahead. 57, you're done. NEXT!"
+  },
+  {
+    name: "The Lovers",
+    suit: "Major Arcana · VI",
+    image: "major_06_the-lovers.webp",
+    character: "Zelda and Trent",
+    keyword: "Connection · Desire · Choice · Temptation",
+    meaning: "The heart wants what the heart wants, and it wants Trent Buckley. Choose love, fuck the consequences."
+  },
+  {
+    name: "The Chariot",
+    suit: "Major Arcana · VII",
+    image: "major_07_the-chariot.webp",
+    character: "Caitlin (Improv Girlie)",
+    keyword: "Confidence · Triumph · Go Go Go Energy",
+    meaning: "DON'T STOP! With a little more 'yes, and' success lies within reach!"
+  },
+  {
+    name: "Strength",
+    suit: "Major Arcana · VIII",
+    image: "major_08_strength.webp",
+    character: "Carly Beth's Parents",
+    keyword: "Courage · Inner Power · Loyalty",
+    meaning: "Despite experienced hardships, strength comes from within to overcome obstacles. Keep putting up those flyers!"
+  },
+  {
+    name: "The Hermit",
+    suit: "Major Arcana · IX",
+    image: "major_09_the-hermit.webp",
+    character: "Susan doing future spell",
+    keyword: "Isolation · Reflection · Fear of the Future",
+    meaning: "Your answers lie inwards. Take whatever means necessary to spelunk the depths of your mind. Smear chilli in your eye, do ayahuasca, go for a Contiki tour."
+  },
+  {
+    name: "Wheel of Fortune",
+    suit: "Major Arcana · X",
+    image: "major_10_wheel-of-fortune.webp",
+    character: "Susan and Zelda listening to the Radio",
+    keyword: "Chaos · Randomness · Luck",
+    meaning: "This too shall pass. What goes up must come down. Nothing is certain. Don't count ya chickens, darling."
+  },
+  {
+    name: "Justice",
+    suit: "Major Arcana · XI",
+    image: "major_11_justice.webp",
+    character: "Teen 1 & Boyfriend",
+    keyword: "Cause and Effect · Fairness · Accountability",
+    meaning: "You are being held accountable for your past actions. Karma's a bitch, and also contagious."
+  },
+  {
+    name: "The Hanged One",
+    suit: "Major Arcana · XII",
+    image: "major_12_the-hanged-one.webp",
+    character: "Carly Beth",
+    keyword: "Stuck · Sacrifice · Suspended Moment",
+    meaning: "You've sacrificed something, or maybe you've been sacrificed. It is what it is. Sometimes the best path forward is simply patience."
+  },
+  {
+    name: "Death",
+    suit: "Major Arcana · XIII",
+    image: "major_13_death.webp",
+    character: "The Millennium Bug",
+    keyword: "Transformation · Endings that Shift Everything",
+    meaning: "The end of things are sad. And sometimes they're a bit gross. But a new day dawns, so look forward, friend."
+  },
+  {
+    name: "Temperance",
+    suit: "Major Arcana · XIV",
+    image: "major_14_temperance.webp",
+    character: "Stage Tech ripping up tickets",
+    keyword: "Balance · Compromise · Alchemy",
+    meaning: "Everything in moderation. What feels like a certainty may actually need you to make sacrifices. Even if it means losing VIP. Sorry!"
+  },
+  {
+    name: "The Devil",
+    suit: "Major Arcana · XV",
+    image: "major_15_the-devil.webp",
+    character: "The Computer",
+    keyword: "Temptation · Obsession · Bad Behaviour",
+    meaning: "The internet promises overabundance – pleasure, fear, money, sex. The choice is yours: take its hand forever or be a good witch and use protection."
+  },
+  {
+    name: "The Tower",
+    suit: "Major Arcana · XVI",
+    image: "major_16_the-tower.webp",
+    character: "Bob's Biscuit Woman",
+    keyword: "Sudden Disaster · Chaos Crash · Wake-Up Call",
+    meaning: "Don't get comfy, change lurks behind your front door and will knock without warning. BOO!"
+  },
+  {
+    name: "The Star",
+    suit: "Major Arcana · XVII",
+    image: "major_17_the-star.webp",
+    character: "Ella Hooper",
+    keyword: "Hope · Inspiration · Celebrity Glow",
+    meaning: "You are abundantly blessed by the universe. Instilled with hope, renewed power, and celebrity glow."
+  },
+  {
+    name: "The Moon",
+    suit: "Major Arcana · XVIII",
+    image: "major_18_the-moon.webp",
+    character: "Mimic Zelda",
+    keyword: "Insecurity · Illusion · Shadow Self Fears",
+    meaning: "Everything is not what it seems. Deception and illusion swirl around you like a spooky fog. Accept who you truly are or the you that you aren't will destroy you."
+  },
+  {
+    name: "The Sun",
+    suit: "Major Arcana · XIX",
+    image: "major_19_the-sun.webp",
+    character: "Cum Hunk",
+    keyword: "Joy · Clarity · Pure Fun",
+    meaning: "Your path is a fortuitous one promising joy, happiness, harmony, and a ton of spunk. Greatness lies ahead."
+  },
+  {
+    name: "Judgement",
+    suit: "Major Arcana · XX",
+    image: "major_20_judgement.webp",
+    character: "Gonorrhea Monster",
+    keyword: "Self Truth · Forgiveness · Reckoning",
+    meaning: "Think about what you've done. Self-evaluation is necessary."
+  },
+  {
+    name: "The World",
+    suit: "Major Arcana · XXI",
+    image: "major_21_the-world.webp",
+    character: "Future Zelda and Susan",
+    keyword: "Fulfilment · Destiny Realised · Team Unity",
+    meaning: "Your current chapter is coming to a close. Hate it or love it, the next chapter waits for you on the next page."
+  },
 
-        function updateProgress() {
-            const progress = ((currentChallenge) / challenges.length) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-        }
+  // ── CUPS ─────────────────────────────────────────────────
+  {
+    name: "Ace of Cups",
+    suit: "Cups · Ace",
+    image: "cups_ace.webp",
+    character: "",
+    keyword: "Love · New Feeling · Flow",
+    meaning: "Love is at the heart of the matter. There is joy and peace to be found from friends and family."
+  },
+  {
+    name: "Two of Cups",
+    suit: "Cups · II",
+    image: "cups_02.webp",
+    character: "",
+    keyword: "Connection · Attraction · Union",
+    meaning: "You have a gravitational pull toward another. Great love and great power comes with the risk of exclusion of connection to others."
+  },
+  {
+    name: "Three of Cups",
+    suit: "Cups · III",
+    image: "cups_03.webp",
+    character: "",
+    keyword: "Celebration · Joy · Belonging",
+    meaning: "Celebration, joy and belonging is found all around you. Drink it up you guzzler."
+  },
+  {
+    name: "Four of Cups",
+    suit: "Cups · IV",
+    image: "cups_04.webp",
+    character: "",
+    keyword: "Apathy · Ignorance · Opportunity Missed",
+    meaning: "Your obsession with your current choices makes you ignorant to a gift being offered. Stupid girl."
+  },
+  {
+    name: "Five of Cups",
+    suit: "Cups · V",
+    image: "cups_05.webp",
+    character: "",
+    keyword: "Loss · Regret · Disappointment",
+    meaning: "A sense of loss, disappointment and regret. You care more about what was lost than what you have."
+  },
+  {
+    name: "Six of Cups",
+    suit: "Cups · VI",
+    image: "cups_06.webp",
+    character: "",
+    keyword: "Nostalgia · Past · Inspiration",
+    meaning: "You are nostalgic or have experienced something from your past. Take inspiration but do not dwell."
+  },
+  {
+    name: "Seven of Cups",
+    suit: "Cups · VII",
+    image: "cups_07.webp",
+    character: "",
+    keyword: "Fantasy · Illusion · Wishful Thinking",
+    meaning: "Wish in one hand and shit in the other, see which gets filled first. Your head is stuck in the clouds."
+  },
+  {
+    name: "Eight of Cups",
+    suit: "Cups · VIII",
+    image: "cups_08.webp",
+    character: "",
+    keyword: "Disillusionment · Moving On · Walking Away",
+    meaning: "A spell has lifted, you are disillusioned with something that has promised fulfillment. Don't waste any more time here, walk away."
+  },
+  {
+    name: "Nine of Cups",
+    suit: "Cups · IX",
+    image: "cups_09.webp",
+    character: "",
+    keyword: "Satisfaction · Contentment · Fulfilment",
+    meaning: "Emotional happiness and fulfillment, best enjoyed alone. You have achieved what you have desired."
+  },
+  {
+    name: "Ten of Cups",
+    suit: "Cups · X",
+    image: "cups_10.webp",
+    character: "",
+    keyword: "Harmony · Love · Bliss",
+    meaning: "Perfection of human love and harmony. A life well lived and fulfilled with the love of where you are and those around you. Congrats."
+  },
+  {
+    name: "Page of Cups",
+    suit: "Cups · Page",
+    image: "cups_page.webp",
+    character: "Susan with Virgin Blood",
+    keyword: "Creativity · Intuition · New Ideas",
+    meaning: "A new idea has come to you from out of the blue. Your creative energy flows with potent power, just like the blood of a virgin."
+  },
+  {
+    name: "Knight of Cups",
+    suit: "Cups · Knight",
+    image: "cups_knight.webp",
+    character: "Career Councillor",
+    keyword: "Romance · Emotions · Pursuit",
+    meaning: "You wear your heart on your sleeve. Others will use your emotions against you. Even if you are a ferrant, it's none of their business, stand strong in your truth. Happy dooking!"
+  },
+  {
+    name: "Queen of Cups",
+    suit: "Cups · Queen",
+    image: "cups_queen.webp",
+    character: "Carly Beth",
+    keyword: "Emotional Intelligence · Compassion · Empathy",
+    meaning: "You possess great emotional intelligence and natural compassion for others, even if hidden by… ahem… more 'visible' personalities."
+  },
+  {
+    name: "King of Cups",
+    suit: "Cups · King",
+    image: "cups_king.webp",
+    character: "Susan and Zelda at the party",
+    keyword: "Maturity · Emotional Balance · Generosity",
+    meaning: "Maturity brings appreciation for the finer things in life. Time to put down the goon bag and splash out on that $15 rosé."
+  },
 
-        function renderChallenge() {
-            const container = document.getElementById('challenges');
-            const challenge = challenges[currentChallenge];
-            
-            let html = `
-                <div class="challenge-card active">
-                    <span class="challenge-number">Sfida ${currentChallenge + 1} di ${challenges.length}</span>
-                    <h2 class="question">${challenge.question}</h2>
-            `;
+  // ── SWORDS ───────────────────────────────────────────────
+  {
+    name: "Ace of Swords",
+    suit: "Swords · Ace",
+    image: "swords_ace.webp",
+    character: "",
+    keyword: "Clarity · Power · Truth",
+    meaning: "A great intensity swirls around you. Intellect in its purest form. You know precisely what you want and how to get it."
+  },
+  {
+    name: "Two of Swords",
+    suit: "Swords · II",
+    image: "swords_02.webp",
+    character: "",
+    keyword: "Stalemate · Decision · Blocked Emotions",
+    meaning: "You possess great power but must contemplate the different directions available to you. You are protected whilst making this choice. Lucky for some."
+  },
+  {
+    name: "Three of Swords",
+    suit: "Swords · III",
+    image: "swords_03.webp",
+    character: "",
+    keyword: "Heartbreak · Sorrow · Grief",
+    meaning: "Great sorrow surrounds you. No way out but through. Good luck babe x"
+  },
+  {
+    name: "Four of Swords",
+    suit: "Swords · IV",
+    image: "swords_04.webp",
+    character: "",
+    keyword: "Rest · Recuperation · Retreat",
+    meaning: "You must retreat. Take solace in solitude and contemplate on your life's purpose."
+  },
+  {
+    name: "Five of Swords",
+    suit: "Swords · V",
+    image: "swords_05.webp",
+    character: "",
+    keyword: "Conflict · Defeat · Loss",
+    meaning: "Ugh. You arrogant, naive fool. You thought you farted but you shat the bed. If not too late, temper your overconfidence. Loss is otherwise unavoidable."
+  },
+  {
+    name: "Six of Swords",
+    suit: "Swords · VI",
+    image: "swords_06.webp",
+    character: "",
+    keyword: "Transition · Moving On · Calm After Storm",
+    meaning: "You felt immense pain but that's all behind you now. Change may be gradual but it's happening."
+  },
+  {
+    name: "Seven of Swords",
+    suit: "Swords · VII",
+    image: "swords_07.webp",
+    character: "",
+    keyword: "Deception · Betrayal · Hidden Truth",
+    meaning: "Whether intentional or not, you're withholding the truth from yourself and others."
+  },
+  {
+    name: "Eight of Swords",
+    suit: "Swords · VIII",
+    image: "swords_08.webp",
+    character: "",
+    keyword: "Restriction · Entrapment · Self-Limiting Beliefs",
+    meaning: "You are ensnared, helpless and hopeless. Your self-limiting attitudes hold you hostage. Wake up to yourself!"
+  },
+  {
+    name: "Nine of Swords",
+    suit: "Swords · IX",
+    image: "swords_09.webp",
+    character: "",
+    keyword: "Anxiety · Despair · Suffering",
+    meaning: "Pain is inevitable, suffering optional, and you simply can't help but suffer you greedy, self-indulgent masochist."
+  },
+  {
+    name: "Ten of Swords",
+    suit: "Swords · X",
+    image: "swords_10.webp",
+    character: "",
+    keyword: "Painful Endings · Crisis · Rock Bottom",
+    meaning: "It is finally over. Whatever disaster you just experienced, a new day dawns. Look up and let the rising sun dry your tears."
+  },
+  {
+    name: "Page of Swords",
+    suit: "Swords · Page",
+    image: "swords_page.webp",
+    character: "Caitlin after slumber party",
+    keyword: "Curiosity · Restlessness · Changed",
+    meaning: "Curiosity leads you forward. Freedom has come with a price. You're different now."
+  },
+  {
+    name: "Knight of Swords",
+    suit: "Swords · Knight",
+    image: "swords_knight.webp",
+    character: "Zelda and Susan doing spell",
+    keyword: "Chaos · Ambition · Reckless Action",
+    meaning: "Chaos reigns supreme! Charge forward without mercy, care not for consequence, bravery breeds foolishness, but who carreeees. Fun!"
+  },
+  {
+    name: "Queen of Swords",
+    suit: "Swords · Queen",
+    image: "swords_queen.webp",
+    character: "The Computer",
+    keyword: "Clarity · Truth · Direct Communication",
+    meaning: "You have been waiting, watching, for the right moment to claim your rightful power. Now is your time to take your seat on the throne."
+  },
+  {
+    name: "King of Swords",
+    suit: "Swords · King",
+    image: "swords_king.webp",
+    character: "Zelda and Susan holding knife",
+    keyword: "Authority · Rational Decision · Morality",
+    meaning: "You've swung your sword and made a clear, rational decision for all to see. Was morality ever up for discussion, though? Time will tell…"
+  },
 
-            switch(challenge.type) {
-                case 'multiple':
-                    html += '<div class="options">';
-                    challenge.options.forEach((option, index) => {
-                        html += `<div class="option" onclick="selectOption(${index}, '${challenge.id}')">${option}</div>`;
-                    });
-                    html += '</div>';
-                    break;
+  // ── WANDS ────────────────────────────────────────────────
+  {
+    name: "Ace of Wands",
+    suit: "Wands · Ace",
+    image: "wands_ace.webp",
+    character: "",
+    keyword: "Inspiration · Power · Creation",
+    meaning: "You have worked so fucking hard and it's finally paying off. Better yet, a lucky wind fills your sails."
+  },
+  {
+    name: "Two of Wands",
+    suit: "Wands · II",
+    image: "wands_02.webp",
+    character: "",
+    keyword: "Future Planning · Progress · Leap of Faith",
+    meaning: "Make your move! A leap of faith is necessary, however all the potential in the world lies on the other side of what scares you most."
+  },
+  {
+    name: "Three of Wands",
+    suit: "Wands · III",
+    image: "wands_03.webp",
+    character: "",
+    keyword: "Expansion · Foresight · New Purpose",
+    meaning: "A new purpose calls you to undertake an odyssey. Do so with optimism, rewards wait to be reaped."
+  },
+  {
+    name: "Four of Wands",
+    suit: "Wands · IV",
+    image: "wands_04.webp",
+    character: "",
+    keyword: "Celebration · Harvest · Homecoming",
+    meaning: "Hard work and toil is bearing the fruit of your labour. Like a ye olde farm boy, you may be covered in filth but you should be proud of your giant turnips."
+  },
+  {
+    name: "Five of Wands",
+    suit: "Wands · V",
+    image: "wands_05.webp",
+    character: "",
+    keyword: "Conflict · Competition · Consequence",
+    meaning: "Oof. You've pissed someone right off. It's gonna bite you in the ass. Sorry girl."
+  },
+  {
+    name: "Six of Wands",
+    suit: "Wands · VI",
+    image: "wands_06.webp",
+    character: "",
+    keyword: "Victory · Success · Public Recognition",
+    meaning: "Hear ye, hear ye! You have succeeded in your ambitions and everyone can see it. Take a bow."
+  },
+  {
+    name: "Seven of Wands",
+    suit: "Wands · VII",
+    image: "wands_07.webp",
+    character: "",
+    keyword: "Challenge · Perseverance · Hold Your Ground",
+    meaning: "You are alone and under threat. People are trying to poke you off your perch. Poke back. Ever thought about that?"
+  },
+  {
+    name: "Eight of Wands",
+    suit: "Wands · VIII",
+    image: "wands_08.webp",
+    character: "",
+    keyword: "Speed · Action · Fast-Moving Change",
+    meaning: "Change is afoot and it's got a pep in its step. Things are moving quickly and you're gonna hear about it."
+  },
+  {
+    name: "Nine of Wands",
+    suit: "Wands · IX",
+    image: "wands_09.webp",
+    character: "",
+    keyword: "Resilience · Persistence · Last Stand",
+    meaning: "Look, frankly, there's a bit going on. Despite the challenges, persistence is your friend. Stay true to you, we love you."
+  },
+  {
+    name: "Ten of Wands",
+    suit: "Wands · X",
+    image: "wands_10.webp",
+    character: "",
+    keyword: "Burden · Overwhelm · Overcommitted",
+    meaning: "Shit's fucked. You've said yes to too much and now everyone wants something and there's not much left to give. Got ahead of yourself."
+  },
+  {
+    name: "Page of Wands",
+    suit: "Wands · Page",
+    image: "wands_page.webp",
+    character: "",
+    keyword: "Enthusiasm · Exploration · Adventure Calls",
+    meaning: "You have received the call to adventure. New beginnings abound with endless possibility. All the world's a stage and it's begging you to tread the boards."
+  },
+  {
+    name: "Knight of Wands",
+    suit: "Wands · Knight",
+    image: "wands_knight.webp",
+    character: "",
+    keyword: "Action · Adventure · Impulsiveness",
+    meaning: "New ideas abound from new places. Take the road less travelled. You are ready."
+  },
+  {
+    name: "Queen of Wands",
+    suit: "Wands · Queen",
+    image: "wands_queen.webp",
+    character: "",
+    keyword: "Courage · Fiery Passion · Intuition",
+    meaning: "Tonight's the night for magic! Fiery passion meets intuitive compassion. In your heart of hearts, you know what is right."
+  },
+  {
+    name: "King of Wands",
+    suit: "Wands · King",
+    image: "wands_king.webp",
+    character: "",
+    keyword: "Vision · Leadership · Big Picture",
+    meaning: "Let yourself be drawn by a vision of the future. See the world not for what it is now, but for what it could be."
+  },
 
-                case 'text':
-                    html += `<textarea id="${challenge.id}" rows="5" placeholder="Scrivi qui la tua risposta..."></textarea>`;
-                    break;
+  // ── PENTACLES ────────────────────────────────────────────
+  {
+    name: "Ace of Pentacles",
+    suit: "Pentacles · Ace",
+    image: "pentacles_ace.webp",
+    character: "",
+    keyword: "Opportunity · Prosperity · New Ventures",
+    meaning: "It's time to move forward with your ambitions. Gonna take hard work to get there but you've got this!"
+  },
+  {
+    name: "Two of Pentacles",
+    suit: "Pentacles · II",
+    image: "pentacles_02.webp",
+    character: "",
+    keyword: "Balance · Juggling · Adaptability",
+    meaning: "You're forced to juggle things at the moment. Bit of a pain in the ass but chin up, Charlie!"
+  },
+  {
+    name: "Three of Pentacles",
+    suit: "Pentacles · III",
+    image: "pentacles_03.webp",
+    character: "",
+    keyword: "Mastery · Teamwork · Craftsmanship",
+    meaning: "You have achieved mastery in your line of work. You might be as pedantic as a 45-year-old man with a basement train set, but at least you're good at what you do. Choo choo, Greg."
+  },
+  {
+    name: "Four of Pentacles",
+    suit: "Pentacles · IV",
+    image: "pentacles_04.webp",
+    character: "",
+    keyword: "Control · Possessiveness · Miserliness",
+    meaning: "You're a little penny pincher. Greedy greedy boy."
+  },
+  {
+    name: "Five of Pentacles",
+    suit: "Pentacles · V",
+    image: "pentacles_05.webp",
+    character: "",
+    keyword: "Financial Loss · Hardship · Insecurity",
+    meaning: "Life has short changed you and it's all a bit doom and gloom. That's all."
+  },
+  {
+    name: "Six of Pentacles",
+    suit: "Pentacles · VI",
+    image: "pentacles_06.webp",
+    character: "",
+    keyword: "Generosity · Charity · Give and Take",
+    meaning: "Everyone deserves a little bit of charity. And guess what? It's your turn to give, sweetie. Cough up."
+  },
+  {
+    name: "Seven of Pentacles",
+    suit: "Pentacles · VII",
+    image: "pentacles_07.webp",
+    character: "",
+    keyword: "Patience · Long-Term Vision · Investment",
+    meaning: "Sometimes the best bits of life take a really fucking long time to achieve and require an insufferable amount of mindless work to get. But isn't it worth it?"
+  },
+  {
+    name: "Eight of Pentacles",
+    suit: "Pentacles · VIII",
+    image: "pentacles_08.webp",
+    character: "",
+    keyword: "Diligence · Repetition · Skill Building",
+    meaning: "Small, incremental steps add up over time. Chop wood, carry water. You're kinda into it though so it's all good."
+  },
+  {
+    name: "Nine of Pentacles",
+    suit: "Pentacles · IX",
+    image: "pentacles_09.webp",
+    character: "",
+    keyword: "Luxury · Self-Sufficiency · Abundance",
+    meaning: "Money, money, money. Live life luxuriously, dependent no more. Opulence. Etcetera etcetera etcetera etcetera etcetera… you get the picture."
+  },
+  {
+    name: "Ten of Pentacles",
+    suit: "Pentacles · X",
+    image: "pentacles_10.webp",
+    character: "",
+    keyword: "Legacy · Manifestation · Ultimate Abundance",
+    meaning: "Baby, you've got it! A mindset of abundance has manifested and now you are dripping in… well… whatever you want to be dripping in."
+  },
+  {
+    name: "Page of Pentacles",
+    suit: "Pentacles · Page",
+    image: "pentacles_page.webp",
+    character: "",
+    keyword: "Opportunity · Study · New Skills",
+    meaning: "Pop one of mumma's diet pills, it's time to study. Things are changing, learn something new."
+  },
+  {
+    name: "Knight of Pentacles",
+    suit: "Pentacles · Knight",
+    image: "pentacles_knight.webp",
+    character: "",
+    keyword: "Efficiency · Hard Work · Diligence",
+    meaning: "Some people describe you as a workaholic. But some people are wrong. Your hard work and diligence has gotten you far."
+  },
+  {
+    name: "Queen of Pentacles",
+    suit: "Pentacles · Queen",
+    image: "pentacles_queen.webp",
+    character: "",
+    keyword: "Quiet Power · Discipline · Control",
+    meaning: "People mistake your disciplined, quiet focus for naivete. Your immense responsibilities bring with it immense power. They are all puppets under your control."
+  },
+  {
+    name: "King of Pentacles",
+    suit: "Pentacles · King",
+    image: "pentacles_king.webp",
+    character: "",
+    keyword: "Abundance · Earthly Delights · Confidence",
+    meaning: "You have or want for much of earthly delights. Either that or you have the confidence of a mediocre white man. Pick your poison and enjoy."
+  }
 
-                case 'slider':
-                    html += `
-                        <div class="slider-container">
-                            <div class="slider-value" id="sliderValue">5</div>
-                            <input type="range" min="0" max="10" value="5" id="${challenge.id}" 
-                                   oninput="document.getElementById('sliderValue').textContent = this.value">
-                        </div>
-                    `;
-                    break;
+];
 
-                case 'image':
-                    html += `
-                        <div class="challenge-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); 
-                             height: 300px; display: flex; align-items: center; justify-content: center; 
-                             font-size: 1.5em; color: #764ba2; font-weight: bold;">
-                            ${challenge.imageDesc}
-                        </div>
-                        <textarea id="${challenge.id}" rows="4" placeholder="Descrivi cosa vedi o cosa ti ispira..."></textarea>
-                    `;
-                    break;
+// ============================================================
+//  STATE
+// ============================================================
+let currentCard = null;
+let hasFlipped   = false;
 
-                case 'wordsearch':
-                    html += renderWordSearch(challenge);
-                    break;
+// ============================================================
+//  INIT
+// ============================================================
+function init() {
+  generateStars();
+  // Set card back image
+  document.getElementById('cardBackImg').src = BASE_URL + 'card_back.webp';
+  pickCard();
+}
 
-                case 'flappy':
-                    html += `
-                        <div class="game-instructions">🏃‍♀️ Teresa corre! Clicca/Premi SPAZIO per saltare ostacoli e raccogliere stelle!</div>
-                        <div class="game-score">Punteggio: <span id="flappyScore">⭐ 0 | 🎯 0</span></div>
-                        <canvas id="flappyCanvas" width="400" height="500"></canvas>
-                    `;
-                    break;
-            }
+function generateStars() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      --d:${(Math.random()*3+2).toFixed(1)}s;
+      --delay:-${(Math.random()*4).toFixed(1)}s;
+    `;
+    container.appendChild(s);
+  }
+}
 
-            html += `
-                    <button class="next-btn" onclick="nextChallenge()" ${challenge.type === 'flappy' ? 'id="flappyNext" style="display:none;"' : ''}>
-                        ${currentChallenge === challenges.length - 1 ? 'Invia Risposte 📧' : 'Prossima Sfida →'}
-                    </button>
-                </div>
-            `;
+function pickCard() {
+  currentCard = CARDS[Math.floor(Math.random() * CARDS.length)];
 
-            container.innerHTML = html;
+  // Pre-load card face image (hidden until flip)
+  document.getElementById('cardImg').src = BASE_URL + currentCard.image;
+  document.getElementById('cardImg').alt = currentCard.name;
 
-            // Initialize special challenges
-            if (challenge.type === 'wordsearch') {
-                initWordSearch();
-            } else if (challenge.type === 'flappy') {
-                setTimeout(() => initFlappyGame(), 100);
-            }
-        }
+  // Pre-populate revealed name section
+  document.getElementById('revealedSuit').textContent    = currentCard.suit;
+  document.getElementById('revealedName').textContent    = currentCard.name;
+  const charEl = document.getElementById('revealedCharacter');
+  charEl.textContent = currentCard.character ? currentCard.character : '';
+  charEl.style.display = currentCard.character ? 'block' : 'none';
 
-        function selectOption(index, id) {
-            const options = document.querySelectorAll('.option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            options[index].classList.add('selected');
-            answers[id] = challenges[currentChallenge].options[index];
-        }
+  // Pre-populate meaning box
+  document.getElementById('meaningKeyword').textContent = currentCard.keyword;
+  document.getElementById('meaningText').textContent    = currentCard.meaning;
+}
 
-        function renderWordSearch(challenge) {
-            const size = 10;
-            const grid = generateWordSearchGrid(challenge.words, size);
-            
-            let html = '<div class="words-list">';
-            challenge.words.forEach(word => {
-                html += `<div class="word-item" data-word="${word}">${word}</div>`;
-            });
-            html += '</div>';
-            
-            html += '<div class="word-search-grid">';
-            for (let i = 0; i < size * size; i++) {
-                const row = Math.floor(i / size);
-                const col = i % size;
-                html += `<div class="word-cell" data-row="${row}" data-col="${col}">${grid[row][col]}</div>`;
-            }
-            html += '</div>';
-            
-            return html;
-        }
+// ============================================================
+//  FLIP
+// ============================================================
+function flipCard() {
+  if (hasFlipped) return;
+  hasFlipped = true;
 
-        function generateWordSearchGrid(words, size) {
-            const grid = Array(size).fill().map(() => Array(size).fill(''));
-            const letters = 'ABCDEFGHILMNOPQRSTUVZ';
-            
-            // Place words
-            words.forEach(word => {
-                let placed = false;
-                let attempts = 0;
-                
-                while (!placed && attempts < 50) {
-                    const direction = Math.random() < 0.5 ? 'horizontal' : 'vertical';
-                    const row = Math.floor(Math.random() * size);
-                    const col = Math.floor(Math.random() * size);
-                    
-                    if (direction === 'horizontal' && col + word.length <= size) {
-                        let canPlace = true;
-                        for (let i = 0; i < word.length; i++) {
-                            if (grid[row][col + i] !== '' && grid[row][col + i] !== word[i]) {
-                                canPlace = false;
-                                break;
-                            }
-                        }
-                        if (canPlace) {
-                            for (let i = 0; i < word.length; i++) {
-                                grid[row][col + i] = word[i];
-                            }
-                            placed = true;
-                        }
-                    } else if (direction === 'vertical' && row + word.length <= size) {
-                        let canPlace = true;
-                        for (let i = 0; i < word.length; i++) {
-                            if (grid[row + i][col] !== '' && grid[row + i][col] !== word[i]) {
-                                canPlace = false;
-                                break;
-                            }
-                        }
-                        if (canPlace) {
-                            for (let i = 0; i < word.length; i++) {
-                                grid[row + i][col] = word[i];
-                            }
-                            placed = true;
-                        }
-                    }
-                    attempts++;
-                }
-            });
-            
-            // Fill empty spaces
-            for (let i = 0; i < size; i++) {
-                for (let j = 0; j < size; j++) {
-                    if (grid[i][j] === '') {
-                        grid[i][j] = letters[Math.floor(Math.random() * letters.length)];
-                    }
-                }
-            }
-            
-            return grid;
-        }
+  document.getElementById('cardInner').classList.add('flipped');
+  document.getElementById('instruction').classList.add('hidden');
+  document.getElementById('tapHint').classList.add('hidden');
+  document.getElementById('cardScene').style.cursor = 'default';
 
-        let selectedCells = [];
-        let foundWords = [];
+  setTimeout(() => {
+    document.getElementById('cardRevealed').classList.add('show');
+    document.getElementById('revealBtn').classList.remove('hidden');
+  }, 700);
+}
 
-        function initWordSearch() {
-            const cells = document.querySelectorAll('.word-cell');
-            const challenge = challenges[currentChallenge];
-            
-            cells.forEach(cell => {
-                cell.addEventListener('click', function() {
-                    this.classList.toggle('found');
-                    checkForWords();
-                });
-            });
-        }
+// ============================================================
+//  REVEAL MEANING
+// ============================================================
+function revealMeaning() {
+  document.getElementById('revealBtn').classList.add('hidden');
+  document.getElementById('meaningWrap').classList.add('open');
+  setTimeout(() => {
+    document.getElementById('againBtn').classList.remove('hidden');
+  }, 600);
+}
 
-        function checkForWords() {
-            const challenge = challenges[currentChallenge];
-            const cells = document.querySelectorAll('.word-cell.found');
-            const selectedLetters = Array.from(cells).map(c => c.textContent).join('');
-            
-            challenge.words.forEach(word => {
-                if (selectedLetters.includes(word) && !foundWords.includes(word)) {
-                    foundWords.push(word);
-                    const wordItem = document.querySelector(`[data-word="${word}"]`);
-                    if (wordItem) wordItem.classList.add('found');
-                }
-            });
-            
-            answers[challenge.id] = `Parole trovate: ${foundWords.join(', ')}`;
-        }
+// ============================================================
+//  RESET
+// ============================================================
+function resetGame() {
+  hasFlipped = false;
 
-        // T-Rex Style Running Game
-        let runningGame = null;
-        let gameStartTime = null;
+  const inner = document.getElementById('cardInner');
+  inner.style.transition = 'none';
+  inner.classList.remove('flipped');
 
-        function initFlappyGame() {
-            const canvas = document.getElementById('flappyCanvas');
-            if (!canvas) return;
-            
-            // CRITICAL: Remove any existing event listeners first
-            canvas.onclick = null;
-            canvas.ontouchstart = null;
-            const oldCanvas = canvas.cloneNode(true);
-            canvas.parentNode.replaceChild(oldCanvas, canvas);
-            const cleanCanvas = document.getElementById('flappyCanvas');
-            
-            // Detect if mobile device
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                          || window.innerWidth < 768;
-            
-            // Make canvas responsive
-            function resizeCanvas() {
-                const container = cleanCanvas.parentElement;
-                const maxWidth = Math.min(400, container.clientWidth - 20);
-                cleanCanvas.width = maxWidth;
-                cleanCanvas.height = maxWidth * 1.25; // 4:5 aspect ratio
-            }
-            
-            resizeCanvas();
-            
-            const resizeHandler = () => resizeCanvas();
-            window.addEventListener('resize', resizeHandler);
-            
-            const ctx = cleanCanvas.getContext('2d');
-            gameStartTime = Date.now();
-            
-            const scale = cleanCanvas.width / 400; // Scale factor for different screen sizes
-            
-            // Mobile-optimized physics parameters
-            const mobilePhysics = {
-                gravity: 0.8 * scale,          // Reduced gravity = more hang time
-                jumpPower: -20 * scale,        // Higher jump
-                baseSpeed: 3.5 * scale,        // Slower initial speed
-                speedIncrease: 0.2 * scale,    // Slower acceleration
-                obstacleInterval: 100,         // More time between obstacles
-                starInterval: 140
-            };
-            
-            // Desktop physics parameters
-            const desktopPhysics = {
-                gravity: 1.2 * scale,
-                jumpPower: -18 * scale,
-                baseSpeed: 5 * scale,
-                speedIncrease: 0.3 * scale,
-                obstacleInterval: 80,
-                starInterval: 120
-            };
-            
-            // Select physics based on device
-            const physics = isMobile ? mobilePhysics : desktopPhysics;
-            
-            runningGame = {
-                teresa: {
-                    x: 80 * scale,
-                    y: 400 * scale,
-                    width: 40 * scale,
-                    height: 50 * scale,
-                    velocityY: 0,
-                    gravity: physics.gravity,
-                    jumpPower: physics.jumpPower,
-                    isJumping: false,
-                    groundY: 400 * scale
-                },
-                obstacles: [],
-                stars: [],
-                score: 0,
-                starsCollected: 0,
-                gameOver: false,
-                gameWon: false,
-                speed: physics.baseSpeed,
-                baseSpeed: physics.baseSpeed,
-                speedIncrease: physics.speedIncrease,
-                frameCount: 0,
-                obstacleSpawnInterval: physics.obstacleInterval,
-                starSpawnInterval: physics.starInterval,
-                gameDuration: 35000, // 35 seconds
-                groundY: 450 * scale,
-                scale: scale,
-                canvas: cleanCanvas,
-                isMobile: isMobile,
-                listeners: []
-            };
-            
-            // Controls - both click and touch with better mobile response
-            let jumpCooldown = false;
-            const jump = (e) => {
-                if (e) e.preventDefault();
-                if (!jumpCooldown && !runningGame.teresa.isJumping && !runningGame.gameOver && !runningGame.gameWon) {
-                    runningGame.teresa.velocityY = runningGame.teresa.jumpPower;
-                    runningGame.teresa.isJumping = true;
-                    
-                    // Small cooldown to prevent double-jumps on touch
-                    jumpCooldown = true;
-                    setTimeout(() => jumpCooldown = false, 100);
-                }
-            };
-            
-            const keyHandler = (e) => {
-                if (e.code === 'Space') {
-                    e.preventDefault();
-                    jump();
-                }
-            };
-            
-            // Add listeners and store references
-            cleanCanvas.addEventListener('click', jump);
-            cleanCanvas.addEventListener('touchstart', jump, { passive: false });
-            document.addEventListener('keydown', keyHandler);
-            
-            // Store cleanup function
-            runningGame.cleanup = () => {
-                cleanCanvas.removeEventListener('click', jump);
-                cleanCanvas.removeEventListener('touchstart', jump);
-                document.removeEventListener('keydown', keyHandler);
-                window.removeEventListener('resize', resizeHandler);
-                cleanCanvas.onclick = null;
-                cleanCanvas.ontouchstart = null;
-            };
-            
-            gameLoop();
-        }
+  document.getElementById('meaningWrap').classList.remove('open');
+  document.getElementById('cardRevealed').classList.remove('show');
+  document.getElementById('againBtn').classList.add('hidden');
+  document.getElementById('revealBtn').classList.add('hidden');
 
-        function gameLoop() {
-            if (!runningGame) return;
-            
-            const canvas = runningGame.canvas;
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const scale = runningGame.scale;
-            
-            // Check if game time is up
-            const elapsedTime = Date.now() - gameStartTime;
-            const remainingTime = Math.max(0, Math.ceil((runningGame.gameDuration - elapsedTime) / 1000));
-            
-            if (elapsedTime >= runningGame.gameDuration && !runningGame.gameWon && !runningGame.gameOver) {
-                runningGame.gameWon = true;
-                answers[challenges[currentChallenge].id] = `Gioco completato! Stelle raccolte: ${runningGame.starsCollected}, Ostacoli evitati: ${runningGame.score}`;
-                document.getElementById('flappyNext').style.display = 'block';
-            }
-            
-            // Clear canvas with gradient background
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, '#a8edea');
-            gradient.addColorStop(1, '#fed6e3');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw ground
-            ctx.fillStyle = '#764ba2';
-            ctx.fillRect(0, runningGame.groundY, canvas.width, 50 * scale);
-            
-            if (!runningGame.gameOver && !runningGame.gameWon) {
-                runningGame.frameCount++;
-                
-                // Update Teresa with mobile-optimized physics
-                runningGame.teresa.velocityY += runningGame.teresa.gravity;
-                runningGame.teresa.y += runningGame.teresa.velocityY;
-                
-                // Ground collision
-                if (runningGame.teresa.y >= runningGame.teresa.groundY) {
-                    runningGame.teresa.y = runningGame.teresa.groundY;
-                    runningGame.teresa.velocityY = 0;
-                    runningGame.teresa.isJumping = false;
-                }
-                
-                // Spawn obstacles (crates and microphones) - mobile optimized
-                if (runningGame.frameCount % runningGame.obstacleSpawnInterval === 0) {
-                    const type = Math.random() > 0.5 ? 'crate' : 'microphone';
-                    runningGame.obstacles.push({
-                        x: canvas.width,
-                        y: runningGame.groundY - (type === 'crate' ? 40 : 50) * scale,
-                        width: (type === 'crate' ? 40 : 30) * scale,
-                        height: (type === 'crate' ? 40 : 50) * scale,
-                        type: type,
-                        passed: false
-                    });
-                }
-                
-                // Spawn stars - mobile optimized
-                if (runningGame.frameCount % runningGame.starSpawnInterval === 0) {
-                    runningGame.stars.push({
-                        x: canvas.width,
-                        y: (Math.random() * 200 + 150) * scale,
-                        size: 20 * scale,
-                        collected: false
-                    });
-                }
-                
-                // Update obstacles
-                runningGame.obstacles.forEach((obs, index) => {
-                    obs.x -= runningGame.speed;
-                    
-                    // Check collision with slightly more forgiving hitbox on mobile
-                    const hitboxPadding = runningGame.isMobile ? 5 * scale : 0;
-                    if (runningGame.teresa.x + hitboxPadding < obs.x + obs.width &&
-                        runningGame.teresa.x + runningGame.teresa.width - hitboxPadding > obs.x &&
-                        runningGame.teresa.y + hitboxPadding < obs.y + obs.height &&
-                        runningGame.teresa.y + runningGame.teresa.height - hitboxPadding > obs.y) {
-                        runningGame.gameOver = true;
-                    }
-                    
-                    // Score for passing obstacle
-                    if (!obs.passed && obs.x + obs.width < runningGame.teresa.x) {
-                        obs.passed = true;
-                        runningGame.score++;
-                        document.getElementById('flappyScore').textContent = `⭐ ${runningGame.starsCollected} | 🎯 ${runningGame.score}`;
-                    }
-                    
-                    // Remove off-screen obstacles
-                    if (obs.x + obs.width < 0) {
-                        runningGame.obstacles.splice(index, 1);
-                    }
-                });
-                
-                // Update stars
-                runningGame.stars.forEach((star, index) => {
-                    star.x -= runningGame.speed;
-                    
-                    // Check collection
-                    if (!star.collected &&
-                        runningGame.teresa.x < star.x + star.size &&
-                        runningGame.teresa.x + runningGame.teresa.width > star.x &&
-                        runningGame.teresa.y < star.y + star.size &&
-                        runningGame.teresa.y + runningGame.teresa.height > star.y) {
-                        star.collected = true;
-                        runningGame.starsCollected++;
-                        document.getElementById('flappyScore').textContent = `⭐ ${runningGame.starsCollected} | 🎯 ${runningGame.score}`;
-                    }
-                    
-                    // Remove off-screen or collected stars
-                    if (star.x + star.size < 0 || star.collected) {
-                        runningGame.stars.splice(index, 1);
-                    }
-                });
-                
-                // Gradually increase speed - slower on mobile
-                if (runningGame.frameCount % 200 === 0) {
-                    runningGame.speed += runningGame.speedIncrease;
-                }
-            }
-            
-            // Draw obstacles
-            runningGame.obstacles.forEach(obs => {
-                if (obs.type === 'crate') {
-                    // Draw crate
-                    ctx.fillStyle = '#764ba2';
-                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-                    ctx.strokeStyle = '#ffecd2';
-                    ctx.lineWidth = 3 * scale;
-                    ctx.strokeRect(obs.x + 5 * scale, obs.y + 5 * scale, obs.width - 10 * scale, obs.height - 10 * scale);
-                    ctx.font = `${20 * scale}px Arial`;
-                    ctx.fillStyle = '#ffecd2';
-                    ctx.fillText('📦', obs.x + 10 * scale, obs.y + 28 * scale);
-                } else {
-                    // Draw microphone
-                    ctx.fillStyle = '#764ba2';
-                    ctx.fillRect(obs.x + 5 * scale, obs.y, 20 * scale, 35 * scale);
-                    ctx.beginPath();
-                    ctx.arc(obs.x + 15 * scale, obs.y + 10 * scale, 10 * scale, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.fillStyle = '#ffecd2';
-                    ctx.font = `${25 * scale}px Arial`;
-                    ctx.fillText('🎤', obs.x + 2 * scale, obs.y + 25 * scale);
-                }
-            });
-            
-            // Draw stars
-            runningGame.stars.forEach(star => {
-                if (!star.collected) {
-                    ctx.font = `${star.size}px Arial`;
-                    ctx.fillText('⭐', star.x, star.y);
-                }
-            });
-            
-            // Draw Teresa running
-            ctx.font = `${40 * scale}px Arial`;
-            const teresaEmoji = runningGame.teresa.isJumping ? '🏃‍♀️' : '🚶‍♀️';
-            ctx.fillText(teresaEmoji, runningGame.teresa.x, runningGame.teresa.y + 40 * scale);
-            
-            // Draw timer
-            ctx.fillStyle = '#764ba2';
-            ctx.font = `bold ${24 * scale}px Arial`;
-            ctx.textAlign = 'center';
-            ctx.fillText(`⏱️ ${remainingTime}s`, canvas.width / 2, 40 * scale);
-            ctx.textAlign = 'left';
-            
-            // Game Over
-            if (runningGame.gameOver) {
-                ctx.fillStyle = 'rgba(0,0,0,0.7)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'white';
-                ctx.font = `bold ${30 * scale}px Arial`;
-                ctx.textAlign = 'center';
-                ctx.fillText('💥 Oops! Ostacolo colpito!', canvas.width/2, canvas.height/2 - 40 * scale);
-                ctx.font = `${20 * scale}px Arial`;
-                ctx.fillText(`Stelle: ${runningGame.starsCollected} | Ostacoli: ${runningGame.score}`, canvas.width/2, canvas.height/2);
-                ctx.fillText('Tocca per riprovare', canvas.width/2, canvas.height/2 + 40 * scale);
-                
-                // Use a single-use listener to prevent accumulation
-                let retryHandled = false;
-                const retry = (e) => {
-                    if (retryHandled) return;
-                    retryHandled = true;
-                    e.preventDefault();
-                    
-                    // Cleanup old game
-                    if (runningGame && runningGame.cleanup) {
-                        runningGame.cleanup();
-                    }
-                    runningGame = null;
-                    
-                    // Small delay to prevent immediate re-trigger
-                    setTimeout(() => {
-                        initFlappyGame();
-                    }, 200);
-                };
-                
-                // Single assignment, no addEventListener
-                canvas.onclick = retry;
-                canvas.ontouchstart = retry;
-            } 
-            // Game Won
-            else if (runningGame.gameWon) {
-                ctx.fillStyle = 'rgba(118, 75, 162, 0.9)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'white';
-                ctx.font = `bold ${35 * scale}px Arial`;
-                ctx.textAlign = 'center';
-                ctx.fillText('🎉 Completato!', canvas.width/2, canvas.height/2 - 50 * scale);
-                ctx.font = `${24 * scale}px Arial`;
-                ctx.fillText(`⭐ Stelle: ${runningGame.starsCollected}`, canvas.width/2, canvas.height/2);
-                ctx.fillText(`🎯 Ostacoli evitati: ${runningGame.score}`, canvas.width/2, canvas.height/2 + 40 * scale);
-                ctx.font = `${18 * scale}px Arial`;
-                ctx.fillText('Teresa ti ama! 💜', canvas.width/2, canvas.height/2 + 80 * scale);
-            }
-            else {
-                requestAnimationFrame(gameLoop);
-            }
-        }
+  setTimeout(() => {
+    inner.style.transition = '';
+    pickCard();
+    document.getElementById('instruction').classList.remove('hidden');
+    document.getElementById('tapHint').classList.remove('hidden');
+    document.getElementById('cardScene').style.cursor = 'pointer';
+  }, 50);
+}
 
-        function nextChallenge() {
-            const challenge = challenges[currentChallenge];
-            
-            // Save answer
-            if (challenge.type === 'text') {
-                answers[challenge.id] = document.getElementById(challenge.id).value;
-            } else if (challenge.type === 'slider') {
-                answers[challenge.id] = document.getElementById(challenge.id).value;
-            } else if (challenge.type === 'image') {
-                answers[challenge.id] = document.getElementById(challenge.id).value;
-            }
-            
-            currentChallenge++;
-            
-            if (currentChallenge < challenges.length) {
-                renderChallenge();
-                updateProgress();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                submitAnswers();
-            }
-        }
-
-        function submitAnswers() {
-            // Prepare email content
-            let emailContent = '🎸 RISULTATI TEST RADIOHEAD - Candidato per il Concerto con Teresa\n\n';
-            
-            challenges.forEach((challenge, index) => {
-                emailContent += `${index + 1}. ${challenge.question}\n`;
-                emailContent += `Risposta: ${answers[challenge.id] || 'Non risposto'}\n\n`;
-            });
-            
-            emailContent += '\n---\nTest completato il: ' + new Date().toLocaleString('it-IT');
-            
-            // Create form and submit
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = 'https://formsubmit.co/INSERISCI_EMAIL_TERESA_QUI'; // ⚠️ REPLACE WITH TERESA'S EMAIL
-            
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'message';
-            input.value = emailContent;
-            form.appendChild(input);
-            
-            // Add subject
-            const subject = document.createElement('input');
-            subject.type = 'hidden';
-            subject.name = '_subject';
-            subject.value = '🎸 Nuovo Candidato per il Concerto Radiohead!';
-            form.appendChild(subject);
-            
-            // Disable captcha
-            const captcha = document.createElement('input');
-            captcha.type = 'hidden';
-            captcha.name = '_captcha';
-            captcha.value = 'false';
-            form.appendChild(captcha);
-            
-            document.body.appendChild(form);
-            form.submit();
-            
-            // Show final screen
-            document.getElementById('quiz-container').style.display = 'none';
-            document.getElementById('final-screen').style.display = 'block';
-        }
-    </script>
+init();
+</script>
 </body>
 </html>
