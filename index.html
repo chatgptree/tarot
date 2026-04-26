@@ -333,6 +333,35 @@
   .btn-again:hover { box-shadow: 0 0 22px #9b30ff66; transform: translateY(-2px); }
   .btn-again.hidden { display: none; }
 
+  .btn-share {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 12px #f0c04033;
+  }
+  .btn-share:hover { box-shadow: 0 0 22px #f0c04066; transform: translateY(-2px); }
+  .btn-share.hidden { display: none; }
+
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--purple);
+    color: #fff;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    padding: 0.65rem 1.5rem;
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; }
+
   .blink { animation: blink 1.1s step-start infinite; color: var(--gold); }
   @keyframes blink { 50% { opacity: 0; } }
 
@@ -413,10 +442,16 @@
     </div>
   </div>
 
-  <!-- Draw again -->
+  <!-- Share + Draw again -->
+  <button class="btn btn-share hidden" id="shareBtn" onclick="shareReading()">
+    ✦ Share This Reading ✦
+  </button>
   <button class="btn btn-again hidden" id="againBtn" onclick="resetGame()">
     ✧ Draw Another Card ✧
   </button>
+
+  <!-- Clipboard toast -->
+  <div class="toast" id="toast">✦ Link copied to clipboard ✦</div>
 
   <p class="game-footer">
     For entertainment purposes. Or not. The universe decides.
@@ -1081,13 +1116,23 @@ let currentCard = null;
 let hasFlipped   = false;
 
 // ============================================================
-//  INIT
+//  INIT — check for shared card in URL first
 // ============================================================
 function init() {
   generateStars();
-  // Set card back image
   document.getElementById('cardBackImg').src = BASE_URL + 'card_back.webp';
-  pickCard();
+
+  const params  = new URLSearchParams(window.location.search);
+  const slug    = params.get('card');
+  const shared  = slug && CARDS.find(c => c.image.replace('.webp', '') === slug);
+
+  if (shared) {
+    currentCard = shared;
+    loadCard();
+    autoReveal();   // land with card flipped + reading open
+  } else {
+    pickCard();
+  }
 }
 
 function generateStars() {
@@ -1107,41 +1152,62 @@ function generateStars() {
   }
 }
 
+// ============================================================
+//  PICK (random) + LOAD (populate DOM)
+// ============================================================
 function pickCard() {
   currentCard = CARDS[Math.floor(Math.random() * CARDS.length)];
+  // Update URL silently so the card is shareable immediately
+  history.replaceState(null, '', '?card=' + currentCard.image.replace('.webp', ''));
+  loadCard();
+}
 
-  // Pre-load card face image (hidden until flip)
-  document.getElementById('cardImg').src = BASE_URL + currentCard.image;
-  document.getElementById('cardImg').alt = currentCard.name;
-
-  // Pre-populate revealed name section
-  document.getElementById('revealedSuit').textContent    = currentCard.suit;
-  document.getElementById('revealedName').textContent    = currentCard.name;
+function loadCard() {
+  document.getElementById('cardImg').src        = BASE_URL + currentCard.image;
+  document.getElementById('cardImg').alt        = currentCard.name;
+  document.getElementById('revealedSuit').textContent  = currentCard.suit;
+  document.getElementById('revealedName').textContent  = currentCard.name;
   const charEl = document.getElementById('revealedCharacter');
-  charEl.textContent = currentCard.character ? currentCard.character : '';
+  charEl.textContent   = currentCard.character || '';
   charEl.style.display = currentCard.character ? 'block' : 'none';
-
-  // Pre-populate meaning box
   document.getElementById('meaningKeyword').textContent = currentCard.keyword;
   document.getElementById('meaningText').textContent    = currentCard.meaning;
 }
 
 // ============================================================
-//  FLIP
+//  FLIP (user-triggered)
 // ============================================================
 function flipCard() {
   if (hasFlipped) return;
   hasFlipped = true;
-
   document.getElementById('cardInner').classList.add('flipped');
   document.getElementById('instruction').classList.add('hidden');
   document.getElementById('tapHint').classList.add('hidden');
   document.getElementById('cardScene').style.cursor = 'default';
-
   setTimeout(() => {
     document.getElementById('cardRevealed').classList.add('show');
     document.getElementById('revealBtn').classList.remove('hidden');
   }, 700);
+}
+
+// ============================================================
+//  AUTO-REVEAL (for shared links — skip animation)
+// ============================================================
+function autoReveal() {
+  hasFlipped = true;
+  const inner = document.getElementById('cardInner');
+  inner.style.transition = 'none';
+  inner.classList.add('flipped');
+  // Re-enable transition after paint
+  requestAnimationFrame(() => { inner.style.transition = ''; });
+
+  document.getElementById('instruction').classList.add('hidden');
+  document.getElementById('tapHint').classList.add('hidden');
+  document.getElementById('cardScene').style.cursor = 'default';
+  document.getElementById('cardRevealed').classList.add('show');
+  document.getElementById('meaningWrap').classList.add('open');
+  document.getElementById('shareBtn').classList.remove('hidden');
+  document.getElementById('againBtn').classList.remove('hidden');
 }
 
 // ============================================================
@@ -1151,8 +1217,30 @@ function revealMeaning() {
   document.getElementById('revealBtn').classList.add('hidden');
   document.getElementById('meaningWrap').classList.add('open');
   setTimeout(() => {
+    document.getElementById('shareBtn').classList.remove('hidden');
     document.getElementById('againBtn').classList.remove('hidden');
   }, 600);
+}
+
+// ============================================================
+//  SHARE
+// ============================================================
+function shareReading() {
+  const url   = window.location.href;
+  const title = `I drew ${currentCard.name} · The Witchy Girls Tarot`;
+  const text  = currentCard.meaning;
+
+  if (navigator.share) {
+    navigator.share({ title, text, url }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(url).then(() => {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }).catch(() => {
+      prompt('Copy this link:', url);
+    });
+  }
 }
 
 // ============================================================
@@ -1168,11 +1256,12 @@ function resetGame() {
   document.getElementById('meaningWrap').classList.remove('open');
   document.getElementById('cardRevealed').classList.remove('show');
   document.getElementById('againBtn').classList.add('hidden');
+  document.getElementById('shareBtn').classList.add('hidden');
   document.getElementById('revealBtn').classList.add('hidden');
 
   setTimeout(() => {
     inner.style.transition = '';
-    pickCard();
+    pickCard();   // also updates URL to new card slug
     document.getElementById('instruction').classList.remove('hidden');
     document.getElementById('tapHint').classList.remove('hidden');
     document.getElementById('cardScene').style.cursor = 'pointer';
