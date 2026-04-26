@@ -446,6 +446,7 @@
   <button class="btn btn-share hidden" id="shareBtn" onclick="shareReading()">
     ✦ Share This Reading ✦
   </button>
+
   <button class="btn btn-again hidden" id="againBtn" onclick="resetGame()">
     ✧ Draw Another Card ✧
   </button>
@@ -1225,21 +1226,48 @@ function revealMeaning() {
 // ============================================================
 //  SHARE
 // ============================================================
-function shareReading() {
+async function shareReading() {
+  const btn   = document.getElementById('shareBtn');
   const url   = window.location.href;
   const title = `I drew ${currentCard.name} · The Witchy Girls Tarot`;
   const text  = currentCard.meaning;
 
-  if (navigator.share) {
-    navigator.share({ title, text, url }).catch(() => {});
-  } else {
-    navigator.clipboard.writeText(url).then(() => {
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    }).catch(() => {
-      prompt('Copy this link:', url);
-    });
+  // ── Try sharing with image file (mobile) ──
+  if (navigator.share && navigator.canShare) {
+    btn.textContent = '✦ Preparing... ✦';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch(BASE_URL + currentCard.image);
+      const blob     = await response.blob();
+      const file     = new File([blob], currentCard.image, { type: blob.type });
+
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({ title, text, url, files: [file] });
+      } else {
+        // Device supports share but not file — share without image
+        await navigator.share({ title, text, url });
+      }
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        // Fetch or share failed — fall back to URL only
+        try { await navigator.share({ title, text, url }); } catch (_) {}
+      }
+    } finally {
+      btn.textContent = '✦ Share This Reading ✦';
+      btn.disabled = false;
+    }
+    return;
+  }
+
+  // ── Desktop fallback: copy link to clipboard ──
+  try {
+    await navigator.clipboard.writeText(url);
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  } catch (_) {
+    prompt('Copy this link:', url);
   }
 }
 
