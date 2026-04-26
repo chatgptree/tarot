@@ -113,11 +113,13 @@
     font-size: 1rem;
     font-style: italic;
     color: var(--muted);
-    margin-bottom: 2rem;
     line-height: 1.6;
-    transition: opacity 0.4s;
+    transition: opacity 0.4s, max-height 0.5s, margin 0.5s;
+    max-height: 100px;
+    overflow: hidden;
+    margin-bottom: 2rem;
   }
-  .instruction.hidden { opacity: 0; pointer-events: none; }
+  .instruction.hidden { opacity: 0; pointer-events: none; max-height: 0; margin-bottom: 0; }
 
   /* ── Card flip ── */
   .card-scene {
