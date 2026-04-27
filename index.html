@@ -1221,7 +1221,7 @@ function revealMeaning() {
     document.getElementById('shareBtn').classList.remove('hidden');
     document.getElementById('againBtn').classList.remove('hidden');
     document.getElementById('meaningWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 700);
+  }, 300);
 }
 
 // ============================================================
@@ -1276,8 +1276,10 @@ async function shareReading() {
 //  RESET
 // ============================================================
 function resetGame() {
-  document.querySelector('.site-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
   hasFlipped = false;
+  setTimeout(() => {
+    document.querySelector('.site-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
 
   const inner = document.getElementById('cardInner');
   inner.style.transition = 'none';
