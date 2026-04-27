@@ -1275,7 +1275,7 @@ async function shareReading() {
 //  RESET
 // ============================================================
 function resetGame() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.site-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
   hasFlipped = false;
 
   const inner = document.getElementById('cardInner');
