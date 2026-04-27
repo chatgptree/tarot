@@ -392,13 +392,13 @@
 
       <!-- Back -->
       <div class="card-back">
-        <img
-          class="card-back-img"
-          id="cardBackImg"
-          src=""
-          alt="Card Back"
-          onerror="this.classList.add('error'); this.style.display='none';"
-        >
+     <img
+  class="card-back-img"
+  id="cardBackImg"
+  src="https://raw.githubusercontent.com/chatgptree/tarot/main/images/card_back.webp"
+  alt="Card Back"
+  onerror="this.classList.add('error'); this.style.display='none';"
+>
         <div class="card-back-fallback">
           <div class="card-back-stars">✦ ✧ ✦</div>
           <div class="card-back-moon">🌙</div>
@@ -1121,7 +1121,6 @@ let hasFlipped   = false;
 // ============================================================
 function init() {
   generateStars();
-  document.getElementById('cardBackImg').src = BASE_URL + 'card_back.webp';
 
   const params  = new URLSearchParams(window.location.search);
   const slug    = params.get('card');
