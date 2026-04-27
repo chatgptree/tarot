@@ -1220,7 +1220,8 @@ function revealMeaning() {
   setTimeout(() => {
     document.getElementById('shareBtn').classList.remove('hidden');
     document.getElementById('againBtn').classList.remove('hidden');
-  }, 600);
+    document.getElementById('meaningWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 700);
 }
 
 // ============================================================
