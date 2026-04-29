@@ -6,6 +6,7 @@
   THE WITCHY GIRLS — TAROT CARD GAME
 ==========================================================
   Generated: April 2026
+  Updated:   29 April 2026 — added Get Some Deck + Fly Home
 
   GITHUB IMAGE HOSTING
   --------------------
@@ -324,6 +325,16 @@
   .btn-reveal:hover { box-shadow: 0 0 28px #ff3fa499; transform: translateY(-2px); }
   .btn-reveal.hidden { display: none; }
 
+  /* ── Get Some Deck (pink filled CTA) ── */
+  .btn-deck {
+    background: var(--pink);
+    color: #fff;
+    box-shadow: 0 0 18px #ff3fa466;
+    text-decoration: none;
+  }
+  .btn-deck:hover { box-shadow: 0 0 28px #ff3fa499; transform: translateY(-2px); }
+  .btn-deck.hidden { display: none; }
+
   .btn-again {
     background: transparent;
     color: var(--purple);
@@ -341,6 +352,23 @@
   }
   .btn-share:hover { box-shadow: 0 0 22px #f0c04066; transform: translateY(-2px); }
   .btn-share.hidden { display: none; }
+
+  /* ── Fly Home link ── */
+  .fly-home {
+    display: block;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--pink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    transition: opacity 0.2s;
+    opacity: 0.85;
+  }
+  .fly-home:hover { opacity: 1; }
+  .fly-home.hidden { display: none; }
 
   .toast {
     position: fixed;
@@ -392,13 +420,13 @@
 
       <!-- Back -->
       <div class="card-back">
-     <img
-  class="card-back-img"
-  id="cardBackImg"
-  src="https://raw.githubusercontent.com/chatgptree/tarot/main/images/card_back.webp"
-  alt="Card Back"
-  onerror="this.classList.add('error'); this.style.display='none';"
->
+        <img
+          class="card-back-img"
+          id="cardBackImg"
+          src="https://raw.githubusercontent.com/chatgptree/tarot/main/images/card_back.webp"
+          alt="Card Back"
+          onerror="this.classList.add('error'); this.style.display='none';"
+        >
         <div class="card-back-fallback">
           <div class="card-back-stars">✦ ✧ ✦</div>
           <div class="card-back-moon">🌙</div>
@@ -442,14 +470,25 @@
     </div>
   </div>
 
-  <!-- Share + Draw again -->
+  <!-- Share -->
   <button class="btn btn-share hidden" id="shareBtn" onclick="shareReading()">
     ✦ Share This Reading ✦
   </button>
 
+  <!-- Get Some Deck (buy button) -->
+  <a class="btn btn-deck hidden" id="deckBtn" href="https://www.nyan.cat/" target="_blank" rel="noopener">
+    ✦ Get Some Deck ✦
+  </a>
+
+  <!-- Draw again -->
   <button class="btn btn-again hidden" id="againBtn" onclick="resetGame()">
     ✧ Draw Another Card ✧
   </button>
+
+  <!-- Fly Home -->
+  <a class="fly-home hidden" id="homeBtn" href="https://www.thewitchygirls.com" target="_blank" rel="noopener">
+    ↩ Fly Home
+  </a>
 
   <!-- Clipboard toast -->
   <div class="toast" id="toast">✦ Link copied to clipboard ✦</div>
@@ -1207,7 +1246,9 @@ function autoReveal() {
   document.getElementById('cardRevealed').classList.add('show');
   document.getElementById('meaningWrap').classList.add('open');
   document.getElementById('shareBtn').classList.remove('hidden');
+  document.getElementById('deckBtn').classList.remove('hidden');
   document.getElementById('againBtn').classList.remove('hidden');
+  document.getElementById('homeBtn').classList.remove('hidden');
 }
 
 // ============================================================
@@ -1218,7 +1259,9 @@ function revealMeaning() {
   document.getElementById('meaningWrap').classList.add('open');
   setTimeout(() => {
     document.getElementById('shareBtn').classList.remove('hidden');
+    document.getElementById('deckBtn').classList.remove('hidden');
     document.getElementById('againBtn').classList.remove('hidden');
+    document.getElementById('homeBtn').classList.remove('hidden');
     document.getElementById('meaningWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
 }
@@ -1288,7 +1331,9 @@ function resetGame() {
   document.getElementById('cardRevealed').classList.remove('show');
   document.getElementById('againBtn').classList.add('hidden');
   document.getElementById('shareBtn').classList.add('hidden');
+  document.getElementById('deckBtn').classList.add('hidden');
   document.getElementById('revealBtn').classList.add('hidden');
+  document.getElementById('homeBtn').classList.add('hidden');
 
   setTimeout(() => {
     inner.style.transition = '';
